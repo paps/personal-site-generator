@@ -9,6 +9,9 @@
   },
   "author": "Martin Tapia <contact@martintapia.com> (https://martintapia.com/)",
   "license": "CC-BY-NC-SA-4.0",
+  "bin": {
+    "build": "./build.js"
+  },
   "bugs": {
     "url": "https://github.com/paps/personal-site-generator/issues"
   },
