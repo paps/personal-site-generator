@@ -1,0 +1,32 @@
+{
+  "name": "personal-site-generator",
+  "private": false,
+  "version": "1.0.0",
+  "description": "Martin's personal site generator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paps/personal-site-generator.git"
+  },
+  "author": "Martin Tapia <contact@martintapia.com> (https://martintapia.com/)",
+  "license": "CC-BY-NC-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/paps/personal-site-generator/issues"
+  },
+  "homepage": "https://martintapia.com",
+  "dependencies": {
+    "glob": "^7.1.6",
+    "html-entities": "^2.3.2",
+    "showdown": "^1.9.1"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2017
+    },
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ]
+  }
+}
