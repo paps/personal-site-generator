@@ -1,6 +1,6 @@
 # Personal site generator
 
-This module is an ultra-minimal static site generator (SSG). It's used as a dependency in another private repository of mine, which contains the content I wish to publish, for anyone to see.
+This module is an ultra-minimal static site generator (SSG). It's used as a dependency in another private repository of mine, which contains the content I wish to publish for anyone to see.
 
 `build.js` is the entirety of the generator, including «HTML templates» 🤭
 
@@ -23,6 +23,8 @@ The fact that this is JavaScript code hosted on GitHub with so-and-so packages, 
 ## Serving Markdown on the web
 
 Markdown files are written with the following considerations:
+
 - File names will be the URL, without any extension (e.g. `src/blog/foo.md` will be accessible at `/blog/foo`)
 - `index.md` will be accessible at the URL represented by the name of its parent folder, without trailing slash (e.g. `src/blog/index.md` will be accessible at `/blog`)
+
 These considerations are important because, among other things, it gives a standard way of linking articles together.
