@@ -115,12 +115,7 @@ const pageRenderers = {
 		let prevMonth = ""
 		for (const p of PAGES) {
 			if (p.meta.type === "article" && p.location.startsWith("blog/")) {
-				let currentMonth = "Unknown"
-				try {
-					currentMonth = (new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" })).format(new Date(p.meta.created || 0))
-				} catch (e) {
-					console.log(e)
-				}
+				const currentMonth = (new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" })).format(new Date(p.meta.created || 0))
 				if (prevMonth !== currentMonth) {
 					tocHtml += `<p>${currentMonth}</p>`
 					prevMonth = currentMonth
