@@ -117,7 +117,7 @@ const pageRenderers = {
 			if (p.meta.type === "article" && p.location.startsWith("blog/")) {
 				let currentMonth = "Unknown"
 				try {
-					currentMonth = (new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" })).format(new Date(p.meta.created))
+					currentMonth = (new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" })).format(new Date(p.meta.created || 0))
 				} catch (e) {
 					console.log(e)
 				}
