@@ -11,10 +11,11 @@ const encodeHtmlEntities = require("html-entities").encode
 const PAGES = []
 const mdConverter = new showdown.Converter({
 	metadata: true,
-	headerLevelStart: 2,
+	headerLevelStart: 2, // because we already render page titles with <h1>
 	strikethrough: true,
 	tables: true,
 	tasklists: true,
+	parseImgDimensions: true,
 })
 for (const mdFilePath of glob.sync("dist/**/*.md")) {
 	console.log(`⚙️ Ingesting '${mdFilePath}'`)
