@@ -47,14 +47,23 @@ const renderHtmlTop = (page) => {
 		<title>${encodeHtmlEntities(page.meta.title)} &middot; Martin Tapia</title>
 		<link rel="icon" type="image/png" href="/favicon.png">
 		<style>
+			/**/
 			body { margin: 1em auto; max-width: 40em; padding: 0 .62em; font: 1.2em/1.62 sans-serif; }
+			/* Images are meant to be figures, they're separated from the text */
 			img { display: block; margin: auto; max-width: 90%; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; }
+			/* Images and can have captions (I predict this will break something) */
+			p > img + em { display: block; text-align: center; }
+			p > a + em { display: block; text-align: center; }
+			/* Titles take space and are easy to differentiate */
 			h1, h2, h3, h4 { line-height: 1.2; }
 			h2 { text-decoration: underline; }
+			/* Highlight in bright color any anchor that is reached */
 			:target { background-color: #ffa; }
+			/**/
 			@media print { body { max-width: none } }
 		</style>
 		<script>
+			// All link to other domains open in a new tab and have "↗" appended
 			window.addEventListener("DOMContentLoaded", () => {
 				Array.from(document.links).forEach((link) => {
 					if (link.hostname != window.location.hostname) {
