@@ -9,4 +9,4 @@ created: 2021-07-15
 
 Example 2
 
-[![lenna](lenna.png)](lenna.png)
+[![lenna](lenna.png =30%x*)](lenna.png)
