@@ -49,7 +49,8 @@ const renderHtmlTop = (page) => {
 		<style>
 			body { margin: 1em auto; max-width: 40em; padding: 0 .62em; font: 1.2em/1.62 sans-serif; }
 			img { display: block; margin: auto; max-width: 90%; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; }
-			h1,h2,h3 { line-height: 1.2; }
+			h1, h2, h3, h4 { line-height: 1.2; }
+			h2 { text-decoration: underline; }
 			:target { background-color: #ffa; }
 			@media print { body { max-width: none } }
 		</style>
