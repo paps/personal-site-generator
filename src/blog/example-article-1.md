@@ -10,7 +10,7 @@ updated: 2021-08-19
 
 Example 1
 
-This is C code:
+This is C code from redis:
 
 ```c
 void aeDeleteFileEvent(aeEventLoop *eventLoop, int fd, int mask)
@@ -35,6 +35,6 @@ void aeDeleteFileEvent(aeEventLoop *eventLoop, int fd, int mask)
     }
 }
 ```
-*This is a caption for the code*
+*Captioning is not supported for code blocks :(*
 
 EOF

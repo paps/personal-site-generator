@@ -48,13 +48,13 @@ const renderHtmlTop = (page) => {
 
 		<style>
 			body { margin: 1em auto; max-width: 40em; padding: 0 .62em; font: 1.2em/1.62 sans-serif; }
+			hr { border: 0; border-top: 1px solid #aaa; }
 
 			/* Images are meant to be "figures", they're separated from the text */
 			img { display: block; margin: auto; max-width: 90%; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; }
 
-			/* Images, "linked images" and code blocks and can have captions (I predict this will break something at one point) */
+			/* Images and "linked images" can have captions (I predict this will break something at one point) */
 			p > img + em { display: block; text-align: center; }
-			p > a + em { display: block; text-align: center; }
 			p > a + em { display: block; text-align: center; }
 
 			/* Titles make use of space and are easy to differentiate */
@@ -91,7 +91,7 @@ const renderHtmlTop = (page) => {
 			 &middot; 
 			<a href="/blog">Blog</a>
 		</center>
-		<hr /><br />
+		<hr /><hr /><br />
 		<center>
 			<h1>${page.meta.title}</h1>
 			${page.meta.created ? `<b style="font-variant: small-caps;">published</b> ${(new Date(page.meta.created)).toDateString()}<br />` : ""}
@@ -102,7 +102,7 @@ const renderHtmlTop = (page) => {
 
 const renderHtmlBottom = (page) => {
 	let html = `
-		<br /><br /><hr />
+		<br /><br /><hr /><hr />
 		<center>
 			<a href="mailto:contact@martintapia.com?subject=Comment on your '${page.location}' page">Contact 💌</a>
 		</center>
@@ -136,13 +136,16 @@ const pageRenderers = {
 	"blog toc": (page) => {
 		PAGES.sort((page1, page2) => (new Date(page2.meta.created)).getTime() - (new Date(page1.meta.created)).getTime())
 		let tocHtml = ""
-		let prevMonth = ""
+		let prevMonthYear = ""
 		for (const p of PAGES) {
 			if (p.meta.type === "article" && p.location.startsWith("blog/")) {
-				const currentMonth = (new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" })).format(new Date(p.meta.created || 0))
-				if (prevMonth !== currentMonth) {
-					tocHtml += `<p>${currentMonth}</p>`
-					prevMonth = currentMonth
+				const currentMonthYear = (new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" })).format(new Date(p.meta.created || 0))
+				if (prevMonthYear !== currentMonthYear) {
+					if (!prevMonthYear.includes("2017") && currentMonthYear.includes("2017")) {
+						tocHtml += `</ul><hr /><p>Articles from a previous era, imported:</p><ul>`
+					}
+					tocHtml += `<p>${currentMonthYear}</p>`
+					prevMonthYear = currentMonthYear
 				}
 				tocHtml += `<li><a href="${p.location}">${p.meta.title}</a></li>`
 			}
