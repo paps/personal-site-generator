@@ -1,5 +1,5 @@
 ---
-title: Example article 2
+title: Example article 2 with images
 type: article
 published: true
 comments: true
@@ -9,7 +9,13 @@ created: 2021-07-15
 
 Example 2
 
+Image linking to itself, set at 30% width, with caption:
+
 [![lenna](lenna.png =30%x*)](lenna.png)
-*Caption test*
+*Caption test, this should be centered*
+
+Image without any size restriction:
+
+![cold](jonny-caspari-TQGpLw48VsU-unsplash.jpg)
 
 Nice article mate
