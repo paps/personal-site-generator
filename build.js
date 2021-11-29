@@ -47,7 +47,7 @@ const renderHtmlTop = (page) => {
 		<link rel="icon" type="image/png" href="/favicon.png">
 
 		<style>
-			body { margin: 1em auto; max-width: 40em; padding: 0 .62em; font: 1.2em/1.62 sans-serif; }
+			body { margin: 1em auto; max-width: 40em; padding: 0 .62em; font-family: sans-serif; font-size: large; }
 			hr { border: 0; border-top: 1px solid #aaa; }
 			.archive-link { display: inline-block; color: #555; background-color: #ddd; font-size: 70%; font-variant: small-caps; text-decoration: none; }
 
