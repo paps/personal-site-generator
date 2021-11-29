@@ -49,6 +49,7 @@ const renderHtmlTop = (page) => {
 		<style>
 			body { margin: 1em auto; max-width: 40em; padding: 0 .62em; font: 1.2em/1.62 sans-serif; }
 			hr { border: 0; border-top: 1px solid #aaa; }
+			.archive-link { display: inline-block; color: #555; background-color: #ddd; font-size: 70%; font-variant: small-caps; text-decoration: none; }
 
 			/* Images are meant to be "figures", they're separated from the text */
 			img { display: block; margin: auto; max-width: 90%; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; }
@@ -73,12 +74,24 @@ const renderHtmlTop = (page) => {
 		</style>
 
 		<script>
-			// All link to other domains open in a new tab and have "↗" appended
 			window.addEventListener("DOMContentLoaded", () => {
+				// Links to other domains open in a new tab and have "↗" appended
 				Array.from(document.links).forEach((link) => {
 					if (link.hostname != window.location.hostname) {
 						link.target = "_blank"
 						link.innerHTML += "<b>&#x2197;</b>"
+					}
+				})
+				// Transform links to archival websites into two separate links: the original and the archive
+				Array.from(document.links).forEach((link) => {
+					if (link.href.indexOf("https://web.archive.org/web/") === 0) {
+						try {
+							const originalLink = link.href.match(/\\/http.*/g)[0].slice(1)
+							link.innerHTML += \` <a class="archive-link" href="\${link.href}" target="_blank" title="Open an archived version of this page, in case link rot has occured">archive&#x2197;</a>\`
+							link.href = originalLink
+						} catch (e) {
+							console.log(e)
+						}
 					}
 				})
 			})
