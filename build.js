@@ -47,9 +47,9 @@ const renderHtmlTop = (page) => {
 		<link rel="icon" type="image/png" href="/favicon.png">
 
 		<style>
-			body { margin: 1em auto; max-width: 40em; padding: 0 .62em; font-family: sans-serif; font-size: large; }
+			body { margin: 1em auto; max-width: 36em; padding: 0 1em; line-height: 161.8%; background-color: #F9F6F3; font-size: large; font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif; }
 			hr { border: 0; border-top: 1px solid #aaa; }
-			.archive-link { display: inline-block; color: #555; background-color: #ddd; font-size: 70%; font-variant: small-caps; text-decoration: none; }
+			.archive-link { display: inline-block; color: #eee; background-color: #eee; font-size: 70%; font-variant: small-caps; text-decoration: none; }
 
 			/* Images are meant to be "figures", they're separated from the text */
 			img { display: block; margin: auto; max-width: 90%; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; }
@@ -68,7 +68,7 @@ const renderHtmlTop = (page) => {
 			/* Code blocks syntax highlight, this is a copy-paste from https://highlightjs.org/static/demo/styles/base16/solarized-light.css */
 			pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{color:#586e75;background:#fdf6e3}.hljs ::selection,.hljs::selection{background-color:#93a1a1;color:#586e75}.hljs-comment{color:#839496}.hljs-tag{color:#657b83}.hljs-operator,.hljs-punctuation,.hljs-subst{color:#586e75}.hljs-operator{opacity:.7}.hljs-bullet,.hljs-deletion,.hljs-name,.hljs-selector-tag,.hljs-template-variable,.hljs-variable{color:#dc322f}.hljs-attr,.hljs-link,.hljs-literal,.hljs-number,.hljs-symbol,.hljs-variable.constant_{color:#cb4b16}.hljs-class .hljs-title,.hljs-title,.hljs-title.class_{color:#b58900}.hljs-strong{font-weight:700;color:#b58900}.hljs-addition,.hljs-code,.hljs-string,.hljs-title.class_.inherited__{color:#859900}.hljs-built_in,.hljs-doctag,.hljs-keyword.hljs-atrule,.hljs-quote,.hljs-regexp{color:#2aa198}.hljs-attribute,.hljs-function .hljs-title,.hljs-section,.hljs-title.function_,.ruby .hljs-property{color:#268bd2}.diff .hljs-meta,.hljs-keyword,.hljs-template-tag,.hljs-type{color:#6c71c4}.hljs-emphasis{color:#6c71c4;font-style:italic}.hljs-meta,.hljs-meta .hljs-keyword,.hljs-meta .hljs-string{color:#d33682}.hljs-meta .hljs-keyword,.hljs-meta-keyword{font-weight:700}
 			/* Accentuate the separation between text and code blocks */
-			pre { margin: auto; max-width: 90%; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; }
+			pre { line-height: 110%; margin: auto; max-width: 90%; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; }
 
 			@media print { body { max-width: none } }
 		</style>
@@ -104,7 +104,7 @@ const renderHtmlTop = (page) => {
 			 &middot; 
 			<a href="/blog">Blog</a>
 		</center>
-		<hr /><hr /><br />
+		<hr /><br />
 		<center>
 			<h1>${page.meta.title}</h1>
 			${page.meta.created ? `<b style="font-variant: small-caps;">published</b> ${(new Date(page.meta.created)).toDateString()}<br />` : ""}
@@ -115,25 +115,11 @@ const renderHtmlTop = (page) => {
 
 const renderHtmlBottom = (page) => {
 	let html = `
-		<br /><br /><hr /><hr />
+		<br /><br /><hr />
 		<center>
-			<a href="mailto:contact@martintapia.com?subject=Comment on your '${page.location}' page">Contact 💌</a>
+			<a href="mailto:contact@martintapia.com?subject=Comment on the '${page.location}' page">Contact 💌</a>
 		</center>
 	`
-	if (page.meta.comments === "true") {
-		html += `
-			<br /><br />
-			<div id="disqus_thread"></div>
-			<script>
-				(function() {
-					var d = document, s = d.createElement('script');
-					s.src = 'https://martintapia.disqus.com/embed.js';
-					s.setAttribute('data-timestamp', +new Date());
-					(d.head || d.body).appendChild(s);
-				})();
-			</script>
-		`
-	}
 	return html
 }
 
