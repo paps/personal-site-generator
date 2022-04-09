@@ -2,7 +2,6 @@
 title: Blog
 type: blog toc
 published: true
-comments: false
 
 ---
 

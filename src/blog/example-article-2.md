@@ -2,7 +2,6 @@
 title: Example article 2 with images
 type: article
 published: true
-comments: true
 created: 2021-07-15
 
 ---

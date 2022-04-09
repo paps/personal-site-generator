@@ -2,7 +2,6 @@
 title: Example article 1 & syntax highlight <s>huh?</s>
 type: article
 published: true
-comments: true
 created: 2021-08-18
 updated: 2021-08-19
 
