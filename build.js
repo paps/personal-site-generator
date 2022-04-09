@@ -47,17 +47,27 @@ const renderHtmlTop = (page) => {
 		<link rel="icon" type="image/png" href="/favicon.png">
 
 		<style>
-			body { margin: 1em auto; max-width: 36em; padding: 1em; line-height: 161.8%; background-color: #F9F6F3; font-size: larger; font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif; }
+			/* General appearance */
+			body { margin: 1em auto; max-width: 36em; padding: 1em; }
+			@media print { body { max-width: none } }
+			body { background-color: #f9f6f3; }
+
+			/* Use a big, standard, common readable serif font, with golden ratio line height. The goal is readability and sobriety */
+			body { line-height: 161.8%; font-size: larger; font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif; }
+
+			/* A bit of style for some elements */
 			hr { border: 0; border-top: 1px solid #ccc; }
 			.archive-link { display: inline-block; color: #555; background-color: #ddd; font-size: 70%; height: 1em; vertical-align: middle; line-height: 1em; font-variant: small-caps; text-decoration: none; }
 
-			/* Prevent footnote links from messing with the line height */
+			/* Prevent footnote links from messing with the line height inside multi-line paragraphs */
+			/* Taken from https://stackoverflow.com/questions/1530685/html-sup-tag-affecting-line-height-how-to-make-it-consistent */
 			sup { line-height: 0; }
 
 			/* Images are meant to be "figures", they're separated from the text */
 			img { display: block; margin: auto; max-width: 95%; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; }
 
 			/* Images and "linked images" can have captions (I predict this will break something at one point) */
+			/* To caption an image in markdown, simply add italicized text right after it */
 			p > img + em { display: block; text-align: center; }
 			p > a + em { display: block; text-align: center; }
 
@@ -72,12 +82,11 @@ const renderHtmlTop = (page) => {
 			pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{color:#586e75;background:#fdf6e3}.hljs ::selection,.hljs::selection{background-color:#93a1a1;color:#586e75}.hljs-comment{color:#839496}.hljs-tag{color:#657b83}.hljs-operator,.hljs-punctuation,.hljs-subst{color:#586e75}.hljs-operator{opacity:.7}.hljs-bullet,.hljs-deletion,.hljs-name,.hljs-selector-tag,.hljs-template-variable,.hljs-variable{color:#dc322f}.hljs-attr,.hljs-link,.hljs-literal,.hljs-number,.hljs-symbol,.hljs-variable.constant_{color:#cb4b16}.hljs-class .hljs-title,.hljs-title,.hljs-title.class_{color:#b58900}.hljs-strong{font-weight:700;color:#b58900}.hljs-addition,.hljs-code,.hljs-string,.hljs-title.class_.inherited__{color:#859900}.hljs-built_in,.hljs-doctag,.hljs-keyword.hljs-atrule,.hljs-quote,.hljs-regexp{color:#2aa198}.hljs-attribute,.hljs-function .hljs-title,.hljs-section,.hljs-title.function_,.ruby .hljs-property{color:#268bd2}.diff .hljs-meta,.hljs-keyword,.hljs-template-tag,.hljs-type{color:#6c71c4}.hljs-emphasis{color:#6c71c4;font-style:italic}.hljs-meta,.hljs-meta .hljs-keyword,.hljs-meta .hljs-string{color:#d33682}.hljs-meta .hljs-keyword,.hljs-meta-keyword{font-weight:700}
 			/* Accentuate the separation between text and code blocks */
 			pre { line-height: 110%; margin: auto; max-width: 95%; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; }
-
-			@media print { body { max-width: none } }
 		</style>
 
 		<script>
 			window.addEventListener("DOMContentLoaded", () => {
+
 				// Links to other domains open in a new tab and have "↗" appended
 				Array.from(document.links).forEach((link) => {
 					if (link.hostname != window.location.hostname) {
@@ -85,6 +94,7 @@ const renderHtmlTop = (page) => {
 						link.innerHTML += "<b>&#x2197;</b>"
 					}
 				})
+
 				// Transform links to archival websites into two separate links: the original and the archive
 				Array.from(document.links).forEach((link) => {
 					if (link.href.indexOf("https://web.archive.org/web/") === 0) {
@@ -97,6 +107,7 @@ const renderHtmlTop = (page) => {
 						}
 					}
 				})
+
 			})
 		</script>
 
