@@ -24,8 +24,8 @@
   },
   "scripts": {
     "build": "rm -r dist ; cp -r src dist ; node build.js",
-    "watch": "chokidar 'src/**' build.js -c 'npm run build'",
-    "serve": "serve dist"
+    "watch": "NODE_ENV=development chokidar 'src/**' build.js -c 'npm run build'",
+    "serve": "serve --no-clipboard --config ../serve.json dist"
   },
   "eslintConfig": {
     "parserOptions": {

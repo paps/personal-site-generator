@@ -38,6 +38,13 @@ console.log(`Ingested ${PAGES.length} pages 👍\n`)
  * Utils and helpers for renderers
  */
 const renderHtmlTop = (page) => {
+	// Inject a script that monitors every 1s and reloads the page when changes are found, when in development (= watch) mode.
+	// Tricky bit: directoryListing is set to false in serve.json so that the script doesn't reload the page while the site is being built (reload don't happen on 404s)
+	let liveReloader = ""
+	if (process.env.NODE_ENV === "development") {
+		liveReloader = "<script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/gh/paps/LiveJS@master/livejs.js\"></script>"
+	}
+
 	return `
 		<!DOCTYPE html>
 		<html lang="en">
@@ -45,10 +52,11 @@ const renderHtmlTop = (page) => {
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>${page.meta.title} &middot; Martin Tapia</title>
 		<link rel="icon" type="image/png" href="/favicon.png">
+		${liveReloader}
 
 		<style>
 			/* General appearance */
-			body { margin: 1em auto; max-width: 36em; padding: 1em; }
+			body { color: #222; margin: 1em auto; max-width: 36em; padding: 1em; }
 			@media print { body { max-width: none } }
 			body { background-color: #f9f6f3; }
 

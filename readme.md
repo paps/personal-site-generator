@@ -28,3 +28,7 @@ Markdown files are written with the following considerations:
 - `index.md` will be accessible at the URL represented by the name of its parent folder, without trailing slash (e.g. `src/blog/index.md` will be accessible at `/blog`)
 
 These considerations are important because, among other things, it gives a standard way of linking articles together.
+
+## "Development" mode
+
+When writing articles/pages in Markdown, it's great to have a "live" render. This is achieved by executing `npm run serve` (to serve the generated files locally) and `npm run watch` (to re-render the files on each modification) at the same time. `npm run watch` uses `NODE_ENV=development` which adds a super old-school script that automatically reloads the page every second if a change is detected.
