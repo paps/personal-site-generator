@@ -71,6 +71,7 @@ const renderHtmlTop = (page) => {
 			/* A bit of style for some elements */
 			hr { border: 0; border-top: 1px solid #ccc; }
 			.archive-link { display: inline-block; color: #555; background-color: #ddd; font-size: 70%; height: 1em; vertical-align: middle; line-height: 1em; font-variant: small-caps; text-decoration: none; }
+			code { background-color: #fdf6e3; }
 
 			/* Prevent footnote links from messing with the line height inside multi-line paragraphs */
 			/* Taken from https://stackoverflow.com/questions/1530685/html-sup-tag-affecting-line-height-how-to-make-it-consistent */

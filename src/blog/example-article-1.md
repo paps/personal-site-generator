@@ -36,4 +36,6 @@ void aeDeleteFileEvent(aeEventLoop *eventLoop, int fd, int mask)
 ```
 *Captioning is not supported for code blocks :(*
 
+And this is inlined code: `if (mask & AE_WRITABLE) mask |= AE_BARRIER;`. And this as well: `for (j = eventLoop->maxfd-1; j >= 0; j--) if (eventLoop->events[j].mask != AE_NONE) break; eventLoop->maxfd = j;`. Nice!
+
 EOF
