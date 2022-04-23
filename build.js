@@ -29,7 +29,12 @@ for (const mdFilePath of glob.sync("dist/**/*.md")) {
 	if (page.meta.published === "true") {
 		PAGES.push(page)
 	} else {
-		console.log(`\t(skipped because it's not marked as published)`)
+		if (process.env.NODE_ENV === "development") {
+			PAGES.push(page) // useful when running a local npm run watch
+			console.log(`\t(not marked as published but kept anyway in development mode)`)
+		} else {
+			console.log(`\t(skipped because it's not marked as published)`)
+		}
 	}
 }
 console.log(`Ingested ${PAGES.length} pages 👍\n`)
