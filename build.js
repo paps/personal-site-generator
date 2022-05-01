@@ -164,18 +164,15 @@ const pageRenderers = {
 	"blog toc": (page) => {
 		PAGES.sort((page1, page2) => (new Date(page2.meta.created)).getTime() - (new Date(page1.meta.created)).getTime())
 		let tocHtml = ""
-		let prevMonthYear = ""
+		let prevYear
 		for (const p of PAGES) {
 			if (p.meta.type === "article" && p.location.startsWith("blog/")) {
-				const currentMonthYear = (new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" })).format(new Date(p.meta.created || 0))
-				if (prevMonthYear !== currentMonthYear) {
-					if (!prevMonthYear.includes("2017") && currentMonthYear.includes("2017")) {
-						tocHtml += `</ul><hr /><p>Articles from a previous era, imported:</p><ul>`
-					}
-					tocHtml += `<p>${currentMonthYear}</p>`
-					prevMonthYear = currentMonthYear
+				const currentYear = (new Date(p.meta.created || 0)).getFullYear()
+				if (prevYear !== currentYear) {
+					tocHtml += `<p>${currentYear}</p>`
+					prevYear = currentYear
 				}
-				tocHtml += `<li><a href="${p.location}">${p.meta.title}</a></li>`
+				tocHtml += `<li>${(new Intl.DateTimeFormat("en-US", { month: "long" })).format(new Date(p.meta.created || 0))} — <a href="${p.location}">${p.meta.title}</a></li>`
 			}
 		}
 		return `${renderHtmlTop(page)}${page.html}<ul>${tocHtml}</ul>${renderHtmlBottom(page)}`
