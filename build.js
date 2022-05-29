@@ -61,15 +61,15 @@ const renderHtmlTop = (page) => {
 
 		<style>
 			/* General appearance */
-			body { color: #222; margin: 1em auto; max-width: 36em; padding: 1em; }
+			body { background-color: #f9f6f3; color: #222; margin: 1em auto; max-width: 36em; padding: 1em; }
 			@media print { body { max-width: none } }
-			body { background-color: #f9f6f3; }
 
 			/* Use a big, standard, common readable serif font, with golden ratio line height. The goal is readability and sobriety */
 			body { line-height: 161.8%; font-size: larger; font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif; }
 
 			/* A bit of style for some elements */
 			hr { border: 0; border-top: 1px solid #ccc; }
+			blockquote { border-left: 3px solid #ccc; padding-left: 1em; }
 			.archive-link { display: inline-block; color: #555; background-color: #ddd; font-size: 70%; height: 1em; vertical-align: middle; line-height: 1em; font-variant: small-caps; text-decoration: none; }
 			code { background-color: #fdf6e3; }
 
@@ -162,10 +162,11 @@ const pageRenderers = {
 	},
 
 	"blog toc": (page) => {
-		PAGES.sort((page1, page2) => (new Date(page2.meta.created)).getTime() - (new Date(page1.meta.created)).getTime())
+		const allPages = [...PAGES] // Make a shallow copy before sorting because PAGES is being iterated through right now
+		allPages.sort((page1, page2) => (new Date(page2.meta.created)).getTime() - (new Date(page1.meta.created)).getTime())
 		let tocHtml = ""
 		let prevYear
-		for (const p of PAGES) {
+		for (const p of allPages) {
 			if (p.meta.type === "article" && p.location.startsWith("blog/")) {
 				const currentYear = (new Date(p.meta.created || 0)).getFullYear()
 				if (prevYear !== currentYear) {
