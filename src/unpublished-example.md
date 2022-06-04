@@ -1,8 +1,7 @@
 ---
 title: Unpublished example
 type: article
-published: false
 
 ---
 
-This page should not be published.
+This page should not be published. Pages not explictly marked as published are not published.

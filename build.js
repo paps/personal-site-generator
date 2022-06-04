@@ -57,6 +57,7 @@ const renderHtmlTop = (page) => {
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>${page.meta.title} &middot; Martin Tapia</title>
 		<link rel="icon" type="image/png" href="/favicon.png">
+		${page.meta.canonical ? `<link rel="canonical" href="${page.meta.canonical}">` : ""}
 		${liveReloader}
 
 		<style>
