@@ -171,7 +171,7 @@ const pageRenderers = {
 			if (p.meta.type === "article" && p.location.startsWith("blog/")) {
 				const currentYear = (new Date(p.meta.created || 0)).getFullYear()
 				if (prevYear !== currentYear) {
-					tocHtml += `<p>${currentYear}</p>`
+					tocHtml += `<p><b>${currentYear} ⯆</b></p>`
 					prevYear = currentYear
 				}
 				tocHtml += `<li>${(new Intl.DateTimeFormat("en-US", { month: "long" })).format(new Date(p.meta.created || 0))} — <a href="${p.location}">${p.meta.title}</a></li>`
