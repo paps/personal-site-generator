@@ -1,6 +1,6 @@
 {
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "../Dockerfile"
   },
 
   // For codespaces, we don't load env vars containing github credentials
