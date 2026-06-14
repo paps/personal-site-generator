@@ -1,6 +1,6 @@
 {
   "build": {
-    "dockerfile": "../Dockerfile"
+    "dockerfile": "Dockerfile"
   },
 
   // Do this in case we're in a GH codespace or somehow forgot to create the .env file
