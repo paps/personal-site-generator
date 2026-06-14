@@ -1,0 +1,34 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  "runArgs": [
+    // Make the devcontainer join the gluetun's network namespace, the goal
+    // being to force any network traffic through wireguard for analysis
+    //"--network=container:gluetun",
+
+    // Load the vars needed for execution of setup.sh
+    "--env-file",
+    ".devcontainer/.env"
+  ],
+
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+
+  // Runs a background worker every time the container starts
+  "postStartCommand": "nohup bash -c '.devcontainer/bg-worker.sh >/tmp/bg-worker.log 2>&1 &' > /dev/null",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "dev.containers.dockerCredentialHelper": false,
+        "dev.containers.copyGitConfig": false,
+        "dev.containers.gitCredentialHelperConfigLocation": "none",
+        "dev.containers.mountWaylandSocket": false
+      },
+      "extensions": [
+        "Anthropic.claude-code"
+      ]
+    }
+  }
+}

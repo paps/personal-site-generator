@@ -1,25 +1,30 @@
 #!/bin/bash
 set -euo pipefail
 
-#sudo cp mitmproxy-ca-cert.pem /usr/local/share/ca-certificates/mitm.crt
-#sudo update-ca-certificates
+# Only handle git config locally. For codespaces, leave it to them.
+if [[ "${CODESPACES}" != "true" ]]; then
 
-git config --global user.name "$DEVCONTAINER_GIT_USER_NAME"
-git config --global user.email "$DEVCONTAINER_GIT_USER_EMAIL"
+	#sudo cp mitmproxy-ca-cert.pem /usr/local/share/ca-certificates/mitm.crt
+	#sudo update-ca-certificates
 
-# vscode likes to inject a fancy credential helper in the devcontainer, but
-# in this case we don't want to be bothered and want to use the credentials
-# that we already have.
-# The 'store' option just means that git will look into ~/.git-credentials.
-git config --global credential.helper store
-echo "https://$DEVCONTAINER_GITHUB_USERNAME:$DEVCONTAINER_GITHUB_PASSWORD@github.com" > ~/.git-credentials
+	git config --global user.name "$DEVCONTAINER_GIT_USER_NAME"
+	git config --global user.email "$DEVCONTAINER_GIT_USER_EMAIL"
 
-# We're going to use HTTPS with a PAT token instead of SSH keys
-# but we don't want to mess with the already configured repo remote
-# (which would affect the devcontainer's host).
-# So we use the git config trick below:
-git config --global url."https://github.com/".insteadOf git@github.com:
-git config --global --add url."https://github.com/".insteadOf ssh://git@github.com/
+	# vscode likes to inject a fancy credential helper in the devcontainer, but
+	# in this case we don't want to be bothered and want to use the credentials
+	# that we already have.
+	# The 'store' option just means that git will look into ~/.git-credentials.
+	git config --global credential.helper store
+	echo "https://$DEVCONTAINER_GITHUB_USERNAME:$DEVCONTAINER_GITHUB_PASSWORD@github.com" > ~/.git-credentials
+
+	# We're going to use HTTPS with a PAT token instead of SSH keys
+	# but we don't want to mess with the already configured repo remote
+	# (which would affect the devcontainer's host).
+	# So we use the git config trick below:
+	git config --global url."https://github.com/".insteadOf git@github.com:
+	git config --global --add url."https://github.com/".insteadOf ssh://git@github.com/
+
+fi
 
 # Our dev container is running a background process that forcibly deletes
 # convenience features / sockets injected by VSCode. So, as a courtesy and
