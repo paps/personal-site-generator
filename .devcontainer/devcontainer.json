@@ -3,6 +3,10 @@
     "dockerfile": "../Dockerfile"
   },
 
+  // Do this in case we're in a GH codespace or somehow forgot to create the .env file
+  // so that runArgs below works in all cases, albeit with not additional env loaded
+  "initializeCommand": "touch .devcontainer/.env",
+
   "runArgs": [
     // Make the devcontainer join the gluetun's network namespace, the goal
     // being to force any network traffic through wireguard for analysis
