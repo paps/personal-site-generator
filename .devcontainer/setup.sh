@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Only handle git config locally. For codespaces, leave it to them.
-if [[ "${CODESPACES}" != "true" ]]; then
+if [[ "${CODESPACES:-}" != "true" ]]; then
 
 	#sudo cp mitmproxy-ca-cert.pem /usr/local/share/ca-certificates/mitm.crt
 	#sudo update-ca-certificates
