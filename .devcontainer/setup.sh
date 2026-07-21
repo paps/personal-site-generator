@@ -1,23 +1,24 @@
 #!/bin/bash
 set -euo pipefail
 
+# git setup
+# ---------
 # Only handle git config locally. For codespaces, leave it to them.
 if [[ "${CODESPACES:-}" != "true" ]]; then
 
 	#sudo cp mitmproxy-ca-cert.pem /usr/local/share/ca-certificates/mitm.crt
 	#sudo update-ca-certificates
 
-	git config --global user.name "$DEVCONTAINER_GIT_USER_NAME"
-	git config --global user.email "$DEVCONTAINER_GIT_USER_EMAIL"
+	# Use gh as a git credential helper
+	# (will work as long as our env has a valid GH_TOKEN)
+	gh auth setup-git
 
-	# vscode likes to inject a fancy credential helper in the devcontainer, but
-	# in this case we don't want to be bothered and want to use the credentials
-	# that we already have.
-	# The 'store' option just means that git will look into ~/.git-credentials.
-	git config --global credential.helper store
-	echo "https://$DEVCONTAINER_GITHUB_USERNAME:$DEVCONTAINER_GITHUB_PASSWORD@github.com" > ~/.git-credentials
+	# Set our git name and email based on what GitHub returns
+	# (works assuming we have a valid GH_TOKEN when this script runs)
+	git config --global user.name "$(gh api user --jq '.name // .login')"
+	git config --global user.email "$(gh api user --jq '"\(.id)+\(.login)@users.noreply.github.com"')"
 
-	# We're going to use HTTPS with a PAT token instead of SSH keys
+	# We're going to use HTTPS with a PAT token (through gh) instead of SSH keys
 	# but we don't want to mess with the already configured repo remote
 	# (which would affect the devcontainer's host).
 	# So we use the git config trick below:
@@ -26,36 +27,17 @@ if [[ "${CODESPACES:-}" != "true" ]]; then
 
 fi
 
-# Our dev container is running a background process that forcibly deletes
-# convenience features / sockets injected by VSCode. So, as a courtesy and
-# for cosmetics, we unset now irrelevant env vars that could become confusing
-# for humans and agents.
-cat <<'EOF' >> ~/.zshrc
+# claude setup
+# ------------
+# Do this just in case (for jq to work). The file typically already exists
+# because it's created by their curl|bash install script
+touch ~/.claude.json
 
-unset VSCODE_IPC_HOOK_CLI
+# Vim mode
+jq '.editorMode="vim"' ~/.claude.json > /tmp/c && mv /tmp/c ~/.claude.json
 
-unset VSCODE_GIT_ASKPASS_EXTRA_ARGS
-unset VSCODE_GIT_ASKPASS_MAIN
-unset VSCODE_GIT_ASKPASS_NODE
-unset VSCODE_GIT_IPC_HANDLE
-unset GIT_ASKPASS
-unset GIT_EDITOR # git will revert to EDITOR, which is what we want
-
-unset REMOTE_CONTAINERS_DISPLAY_SOCK
-unset REMOTE_CONTAINERS_IPC
-unset REMOTE_CONTAINERS_SOCKETS
-
-unset GPG_AGENT_INFO
-unset SSH_AUTH_SOCK
-unset BROWSER # this is a VSCode convenience script for opening links, it doesn't work anymore without the right socket
-
-# These were our own vars for specifying out github/git user,
-# they were used as a transfer mechanism between a config file and
-# our dev container setup script, they're not really meant as
-# env vars, so we take the opportunity to de-expose them.
-unset DEVCONTAINER_GITHUB_PASSWORD
-unset DEVCONTAINER_GITHUB_USERNAME
-unset DEVCONTAINER_GIT_USER_EMAIL
-unset DEVCONTAINER_GIT_USER_NAME
-EOF
-
+# Claude Code currently has a bug where it won't detect it has an available
+# CLAUDE_CODE_OAUTH_TOKEN unless we set hasCompletedOnboarding.
+if [ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
+	jq '.hasCompletedOnboarding=true' ~/.claude.json > /tmp/c && mv /tmp/c ~/.claude.json
+fi

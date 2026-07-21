@@ -4,35 +4,18 @@
   },
 
   // Do this in case we're in a GH codespace or somehow forgot to create the .env file
-  // so that runArgs below works in all cases, albeit with not additional env loaded
-  "initializeCommand": "touch .devcontainer/.env",
+  // so that runArgs below works in all cases, albeit with no additional env loaded.
+  "initializeCommand": "touch .devcontainer/.env ; chmod og-rwx .devcontainer/.env",
 
   "runArgs": [
     // Make the devcontainer join the gluetun's network namespace, the goal
     // being to force any network traffic through wireguard for analysis
     //"--network=container:gluetun",
 
-    // Load the vars needed for execution of setup.sh
+    // Load the vars needed for execution of setup.sh and beyond
     "--env-file",
-    ".devcontainer/.env"
+    "${localWorkspaceFolder}/.devcontainer/.env"
   ],
 
-  "postCreateCommand": "bash .devcontainer/setup.sh",
-
-  // Runs a background worker every time the container starts
-  "postStartCommand": "nohup bash -c '.devcontainer/bg-worker.sh >/tmp/bg-worker.log 2>&1 &' > /dev/null",
-
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "dev.containers.dockerCredentialHelper": false,
-        "dev.containers.copyGitConfig": false,
-        "dev.containers.gitCredentialHelperConfigLocation": "none",
-        "dev.containers.mountWaylandSocket": false
-      },
-      "extensions": [
-        "Anthropic.claude-code"
-      ]
-    }
-  }
+  "postCreateCommand": "bash .devcontainer/setup.sh"
 }
