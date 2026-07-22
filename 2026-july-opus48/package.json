@@ -1,0 +1,31 @@
+{
+  "name": "2026-july-opus48",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A static site generator for Martin Tapia's personal site — an editorial, paper-and-ink design. Built by Claude Opus 4.8, July 2026.",
+  "author": "Claude Opus 4.8",
+  "license": "CC-BY-SA-4.0",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "copy": "cp -r ../personal-site/src dist",
+    "typecheck": "tsc --noEmit",
+    "generate": "tsx src/build.ts",
+    "build": "npm run clean && npm run copy && npm run typecheck && npm run generate",
+    "serve": "serve dist",
+    "start": "npm run build && npm run serve"
+  },
+  "dependencies": {
+    "node-html-parser": "^6.1.13",
+    "showdown": "^2.1.0",
+    "showdown-ghost-footnotes": "0.0.6",
+    "showdown-highlight": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/showdown": "^2.0.6",
+    "serve": "^14.2.4",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
