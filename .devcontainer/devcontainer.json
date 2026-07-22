@@ -17,5 +17,7 @@
     "${localWorkspaceFolder}/.devcontainer/.env"
   ],
 
-  "postCreateCommand": "bash .devcontainer/setup.sh"
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+
+  "appPort": ["3000:3000"]
 }
