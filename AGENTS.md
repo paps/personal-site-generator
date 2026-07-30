@@ -50,7 +50,7 @@ Below are some hard requirements for SSGs:
 - Use node and npm in a normal and best practice fashion, including having a package.json at the root of its directory.
 - Be in strict TypeScript.
 - Have no caching or similar "compilation optimizations". We are expecting it to do a full re-generation run every time. Must be kept simple.
-- Use the `showdown` npm package for converting the markdown to HTML, along with the `showdown-ghost-footnotes` (nice footnotes at the bottom of some pages) and `showdown-highlight` (code syntax highlighting) extensions. (Note: this is only for the markdown part, of course a SSG needs something additional to have fully working, browsable web pages)
+- Use the `markdown-it` npm package for converting Markdown to HTML, together with `markdown-it-footnote` for footnotes, `markdown-it-highlightjs` for code syntax highlighting, and `markdown-it-attrs` for authored element attributes such as image sizing. Use the packages' default behavior whenever practical. (These packages cover Markdown rendering only; an SSG still needs a site shell to produce complete, browsable HTML pages.)
 - Is not be a single page app (hopefully it was clear already that SSG do not generate a SPA, but only static HTML files).
 - Generate a site that is mobile friendly. **Most people will visit the generated site on a phone!**
 - Be callable as a standard build tool to generate a site, called from another repo
