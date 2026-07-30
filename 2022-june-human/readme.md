@@ -32,3 +32,17 @@ These considerations are important because, among other things, it gives a stand
 ## "Development" mode
 
 When writing articles/pages in Markdown, it's great to have a "live" render. This is achieved by executing `npm run serve` (to serve the generated files locally) and `npm run watch` (to re-render the files on each modification) at the same time. `npm run watch` uses `NODE_ENV=development` which adds a super old-school script that automatically reloads the page every second if a change is detected.
+
+## Screenshots
+
+Serif type, a cream background, generous line height. No JavaScript beyond the two small link fixups, no dark mode, no build step.
+
+| Homepage | Blog table of contents |
+| --- | --- |
+| ![Homepage](screenshots/homepage.png) | ![Blog table of contents](screenshots/blog-toc.png) |
+
+| Article page | Homepage on a phone |
+| --- | --- |
+| ![Article page with code block, table and footnotes](screenshots/article.png) | ![Homepage at a 390px viewport width](screenshots/homepage-mobile.png) |
+
+> All screenshots use placeholder lorem ipsum content, not the real site, so they don't go stale.
