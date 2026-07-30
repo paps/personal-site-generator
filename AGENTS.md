@@ -158,7 +158,7 @@ As said above, you can see the result of your work by using `npx serve`.
 
 It is highly recommended that you use `playwright-cli` as a way to see the pages for yourself and confirm they're working fine and look the way you want to. Install the related agents skills in order to know how to use this very useful tool: `npx @playwright/cli@latest install --skills`. In any case, everything must stay isolated in the SSG's directory at `<ISOLATED_SSG_DIR>`.
 
-You must THOROUGHLY test your work before thinking you're finished. If you say you're finished but in fact, after a run of the SSG, one of the pages is not accessible / not legible, or doesn't fit the requirements in any way, you're going to have bad day.
+You must THOROUGHLY test your work before thinking you're finished. If you say you're finished but in fact, after a run of the SSG, one of the pages is not accessible / not legible, or doesn't fit the requirements in any way, then that's really not great.
 
 ### What to verify
 
