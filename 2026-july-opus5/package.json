@@ -27,13 +27,15 @@
     "start": "npm run regenerate && npm run serve"
   },
   "dependencies": {
-    "showdown": "^2.1.0",
-    "showdown-ghost-footnotes": "0.0.6",
-    "showdown-highlight": "^3.1.0"
+    "markdown-it": "^14.3.0",
+    "markdown-it-attrs": "^5.0.1",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-highlightjs": "^4.3.0"
   },
   "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/markdown-it-footnote": "^3.0.4",
     "@types/node": "^22.10.2",
-    "@types/showdown": "^2.0.6",
     "serve": "^14.2.4",
     "typescript": "^5.7.2"
   }

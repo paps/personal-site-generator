@@ -1,5 +1,5 @@
 /**
- * Build-time rewriting of the links showdown produced.
+ * Build-time rewriting of the links the Markdown renderer produced.
  *
  * Doing this here rather than with runtime JavaScript means the rules hold for
  * readers without JS, for text-mode browsers, and for the agents that fetch the
@@ -21,7 +21,13 @@ function attribute(tag: string, name: string): string | null {
 }
 
 function escapeAttribute(value: string): string {
-  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+  // Renderers give us already-escaped hrefs. Preserve those entities when an
+  // anchor is rebuilt, otherwise `&amp;` becomes `&amp;amp;` and changes query
+  // parameters in the browser.
+  return value
+    .replace(/&(?!(?:#[0-9]+|#x[0-9a-f]+|[a-z][a-z0-9]+);)/gi, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
 }
 
 /** Absolute http(s) URLs are the only thing we can be sure points off-site. */
