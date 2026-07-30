@@ -32,9 +32,10 @@ fi
 # Do this just in case (for jq to work). The file typically already exists
 # because it's created by their curl|bash install script
 touch ~/.claude.json
+mkdir -p ~/.claude ; touch ~/.claude/settings.json
 
-# Vim mode
 jq '.editorMode="vim"' ~/.claude.json > /tmp/c && mv /tmp/c ~/.claude.json
+jq '.permissions.defaultMode="auto"' ~/.claude/settings.json > /tmp/c && mv /tmp/c ~/.claude/settings.json
 
 # Claude Code currently has a bug where it won't detect it has an available
 # CLAUDE_CODE_OAUTH_TOKEN unless we set hasCompletedOnboarding.
