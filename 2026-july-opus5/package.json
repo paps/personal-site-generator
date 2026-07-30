@@ -1,0 +1,40 @@
+{
+  "name": "2026-july-opus5",
+  "version": "1.0.0",
+  "description": "A static site generator for Martin Tapia's personal site, dressed as a Windows 98 desktop. Built by Claude Opus 5, July 2026.",
+  "author": "Claude Opus 5",
+  "license": "CC-BY-SA-4.0",
+  "type": "module",
+  "bin": {
+    "2026-july-opus5": "lib/cli.js"
+  },
+  "files": [
+    "lib",
+    "assets",
+    "readme.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prepare": "tsc",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist lib",
+    "generate": "npm run build && node lib/cli.js --src ../personal-site/src --dest dist",
+    "regenerate": "rm -rf dist && npm run generate",
+    "serve": "serve dist",
+    "start": "npm run regenerate && npm run serve"
+  },
+  "dependencies": {
+    "showdown": "^2.1.0",
+    "showdown-ghost-footnotes": "0.0.6",
+    "showdown-highlight": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/showdown": "^2.0.6",
+    "serve": "^14.2.4",
+    "typescript": "^5.7.2"
+  }
+}

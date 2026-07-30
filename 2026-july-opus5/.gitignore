@@ -1,0 +1,8 @@
+node_modules/
+dist/
+lib/
+
+# Local tooling, not part of the generator
+.playwright/
+.playwright-cli/
+.claude/
