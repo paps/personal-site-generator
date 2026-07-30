@@ -80,12 +80,10 @@ npm run serve      # serve ./dist at http://localhost:3000
 npm start          # build + serve
 ```
 
-> **Note for maintainers:** one source file
-> (`blog/2026/using-mcp-connectors-…​.md`) is currently **empty**. The generator
-> treats an empty file as an unpublished draft — it prints a warning and removes
-> it rather than failing the build. A file that has a *malformed* (but non-empty)
-> front matter block will still hard-fail the build on purpose, so bad metadata
-> never ships.
+> **Note for maintainers:** the generator treats a completely **empty** markdown
+> file as an unpublished draft — it prints a warning and removes it rather than
+> failing the build. A file that has a *malformed* (but non-empty) front matter
+> block will still hard-fail the build on purpose, so bad metadata never ships.
 
 ## Built strictly in TypeScript
 
