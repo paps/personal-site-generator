@@ -16,9 +16,11 @@ If your task is about creating/modifying a SSG, the sections below contains impo
 
 ### Invocation as a build tool
 
-The SSG is meant to be used as a normal CLI build tool, i.e. the `package.json` must have a correct `bin` property. The SSG will typically be invoked from the outside using commands like `npx <THE_SGG_MODULE> --src <SRC_DIR> --dest <DEST_DIR>` or `npm exec <THE_SGG_MODULE> --src <SRC_DIR> --dest <DEST_DIR>`. Hint: this means `package.json` has to have a `prepare` property to compile the TypeScript.
+The SSG is meant to be used as a normal CLI build tool, the `package.json` must have a correct `bin` property exposing the `personal-site-generator` name. The SSG will typically be invoked from the outside using commands like or `npm exec personal-site-generator --src <SRC_DIR> --dest <DEST_DIR>`. Hint: this means `package.json` has to have a `prepare` property to compile TypeScript.
 
-This means the SSG needs to support `--src` and `--dest` parameters. These are always required from the caller. These paths must always be understood as relative to the current working directory, i.e. `process.cwd()`.
+The SSG will always expect to be invoked with the binary name `personal-site-generator` but we're just talking about the binary name here. Otherwise the SSG can have its own identity: package name, directory name, etc.
+
+The SSG needs to support `--src` and `--dest` parameters. These are always required from the caller. These paths must always be understood as relative to the current working directory, i.e. `process.cwd()`.
 
 The SSG must check that the directory targeted by `--src` exists and is non-empty. From now on, we'll call this directory the "source" directory.
 

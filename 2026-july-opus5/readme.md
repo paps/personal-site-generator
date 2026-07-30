@@ -50,7 +50,7 @@ It's a normal CLI build tool. Both paths are relative to the current working
 directory:
 
 ```bash
-npx 2026-july-opus5 --src ./src --dest ./dist
+npm exec personal-site-generator --src ./src --dest ./dist
 ```
 
 `--src` must exist and be non-empty. `--dest` is created if missing and must be

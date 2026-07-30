@@ -13,10 +13,10 @@ function paint(colour: keyof typeof CODES, text: string): string {
 }
 
 const USAGE = `
-  2026-july-opus5 — a Windows 98 flavoured static site generator
+  personal-site-generator — a Windows 98 flavoured static site generator
 
   Usage
-    2026-july-opus5 --src <dir> --dest <dir>
+    personal-site-generator --src <dir> --dest <dir>
 
   Options
     --src   <dir>   Source directory of markdown and assets. Must exist and not be empty.

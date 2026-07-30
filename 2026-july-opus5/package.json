@@ -6,7 +6,7 @@
   "license": "CC-BY-SA-4.0",
   "type": "module",
   "bin": {
-    "2026-july-opus5": "lib/cli.js"
+    "personal-site-generator": "lib/cli.js"
   },
   "files": [
     "lib",
